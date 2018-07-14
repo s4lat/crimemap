@@ -1,10 +1,10 @@
-import MySQLdb
+import pymysql
 import dbconfig
 
 class DBHelper:
 
     def connect(self,database="crimemap"):
-        return MySQLdb.connect(host='localhost',
+        return pymysql.connect(host='localhost',
                                    user=dbconfig.db_user,
                                    password=dbconfig.db_password,
                                    database="crimemap")
@@ -16,7 +16,7 @@ class DBHelper:
                 cursor.execute(query)
             return cursor.fetchall()
         finally:
-            return connection.close()
+            connection.close()
 
     def add_input(self,data):
         connection = self.connect()
