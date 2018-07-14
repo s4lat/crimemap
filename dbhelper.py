@@ -6,7 +6,8 @@ class DBHelper:
     def connect(self,database="crimemap"):
         return MySQLdb.connect(host='localhost',
                                    user=dbconfig.db_user,
-                                   password=dbconfig.db_password)
+                                   password=dbconfig.db_password,
+                                   database="crimemap")
     def get_all_inputs(self):
         connection = self.connect()
         try:
