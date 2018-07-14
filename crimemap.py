@@ -9,7 +9,7 @@ db = DBHelper()
 @app.route('/')
 def index():
 	try:
-		data = DB.get_all_inputs()
+		data = DBHelper.get_all_inputs()
 	except Exception as e:
 		print(e)
 		data = None
@@ -19,7 +19,7 @@ def index():
 def add():
 	try:
 		data = flaskRequest.form.get('userinput')
-		DB.add_input(data)
+		DBHelper.add_input(data)
 	except Exception as e:
 		print(e)
 	return index()
@@ -27,7 +27,7 @@ def add():
 @app.route("/clear")
 def clear():
 	try:
-		DB.clear_all()
+		DBHelper.clear_all()
 	except Exception as e:
 		print(e)
 	return home()
