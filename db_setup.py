@@ -16,7 +16,7 @@ description VARCHAR(1000)
 updated_at TIMESTAMP,
 PRIMARY KEY(id)
 )"""
-        cursor.execute(sql)
+        db.query(sql)
     db.commit()
 finally:
     db.close()
