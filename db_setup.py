@@ -1,9 +1,7 @@
 import _mysql as mysqlclient
 import dbconfig
 
-connection = mysqlclient.connect(host='localhost',
-                                 user=dbconfig.db_user,
-                                 password=dbconfig.db_password)
+connection = mysqlclient.connect('localhost',dbconfig.db_user,dbconfig.db_password)
 
 try:
     with connection.cursor() as cursor:
