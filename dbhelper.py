@@ -8,7 +8,7 @@ class DBHelper:
                                    user=dbconfig.db_user,
                                    password=dbconfig.db_password)
     def get_all_inputs(self):
-        db = self.connect()
+        connection = self.connect()
         try:
             query = "SELECT description FROM crimes;"
             with connection.cursor() as cursor:
