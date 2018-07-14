@@ -4,12 +4,12 @@ from flask import request as flaskRequest
 import requests
 
 app = Flask(__name__)
-db = DBHelper()
+DB = DBHelper()
 
 @app.route('/')
 def index():
 	try:
-		data = DBHelper.get_all_inputs()
+		data = DB.get_all_inputs()
 	except Exception as e:
 		print(e)
 		data = None
@@ -19,7 +19,7 @@ def index():
 def add():
 	try:
 		data = flaskRequest.form.get('userinput')
-		DBHelper.add_input(data)
+		DB.add_input(data)
 	except Exception as e:
 		print(e)
 	return index()
@@ -27,7 +27,7 @@ def add():
 @app.route("/clear")
 def clear():
 	try:
-		DBHelper.clear_all()
+		DB.clear_all()
 	except Exception as e:
 		print(e)
 	return home()
