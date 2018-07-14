@@ -1,4 +1,4 @@
-import mysqlclient
+import _mysql as mysqlclient
 import dbconfig
 
 connection = mysqlclient.connect(host='localhost',
