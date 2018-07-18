@@ -11,12 +11,13 @@ try:
         cursor.execute(sql)
         sql = """CREATE TABLE IF NOT EXISTS crimemap.crimes (
 id int NOT NULL AUTO_INCREMENT,
+category VARCHAR(50) character set utf8,
+title VARCHAR(48) character set utf8,
 latitude FLOAT(10,6),
 longitude FLOAT(10,6),
 date DATETIME,
-category VARCHAR(50),
-description VARCHAR(1000),
-updated_at TIMESTAMP,
+description VARCHAR(1050) character set utf8,
+added TIMESTAMP,
 PRIMARY KEY(id)
 )"""
         cursor.execute(sql)

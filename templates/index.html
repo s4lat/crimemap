@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>Crime Map</title>
+  <meta charset='utf-8' />
   <link type='text/css' rel="stylesheet" href="{{url_for('static',
     filename='css/style.css')}}">
   </script>
@@ -14,6 +15,7 @@
         zoom: 15
       };
     map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+    placeCrimes({{ crimes | safe }})
     google.maps.event.addListener(map, 'click',
       function(event){
         placeMarker(event.latLng);
@@ -31,6 +33,17 @@
       document.getElementById('latitude').value= location.lat()
       document.getElementById('longitude').value= location.lng()
     }
+    function placeCrimes(crimes){
+      for(i=0; i<crimes.length;i++){
+        crime = new google.maps.Marker({
+          position: new google.maps.LatLng(crimes[i].latitude, crimes[i].longitude),
+          map: map,
+          title: crimes[i].title + '\n' + crimes[i].category + '\n' +
+            crimes[i].date + '\n' + crimes[i].description + '\n' +
+            crimes[i].added
+        });
+      }
+    }
   }
   </script><script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?
@@ -41,12 +54,14 @@ key=AIzaSyB_7I8xYc7R5kAKldmhfmlzd0YqWvx0D6Y&callback=initMap"></script>
   <h1> Crime Map</h1>
   <p> A map of recent criminal activity in the world </p>
   <div id="newcrimeform">
-    <form action="/submitcrime" method="POST">
+    <form action="/addcrime" method="POST">
     <label for="category">Category:</label>
     <select name="category" id="category">
         <option value="mugging">Mugging</option>
         <option value"stealing">Stealing</option>
     </select>
+    <label for='title'>Title</label>
+    <input name='title' id='title' type='text' placeholder='Keywords, brief description'/>
     <label for="date">Date:</label>
       <input name="date" id="date" type="date"></input>
       <label for="latitude">Latitude:</label>
@@ -60,28 +75,5 @@ key=AIzaSyB_7I8xYc7R5kAKldmhfmlzd0YqWvx0D6Y&callback=initMap"></script>
     </form>
   </div>
   <div id="map-canvas"></div>
-  <div id=crimetable>
-    <table>
-      <tr>
-        <td>id</td>
-        <td>latitude</td>
-        <td>longitude</td>
-        <td>date</td>
-        <td>category</td>
-        <td>description</td>
-        <td>updated_at</td>
-      </tr>
-      {% for crime in data %}
-      <tr>
-      {% for row in crime %}
-        <td>
-        {{ row }}
-        </td>
-        {% endfor %}
-      </tr>
-      {% endfor %}
-    </table>
-    <a href="/clear">Clear</a>
-  </div>
 </body>
 </html>

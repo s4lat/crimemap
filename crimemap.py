@@ -1,29 +1,27 @@
+# -*- coding: utf-8 -*-
 from dbhelper import DBHelper
 from flask import Flask, render_template,url_for, redirect
 from flask import request as flaskRequest
-import requests
+import requests, json
 
 app = Flask(__name__)
 DB = DBHelper()
 
 @app.route('/')
 def index():
-	try:
-		crimes = DB.get_all_inputs()
-	except Exception as e:
-		print(e)
-		crimes = None
-	return render_template('index.html', data=crimes)
+	crimes = json.dumps(DB.get_all_crimes())
+	return render_template('index.html', crimes=crimes)
 
-@app.route("/submitcrime", methods=['POST'])
+@app.route("/addcrime", methods=['POST'])
 def submitcrime():
+	title = flaskRequest.form.get('title')
 	category = flaskRequest.form.get('category')
 	date = flaskRequest.form.get('date')
 	latitude = flaskRequest.form.get('latitude')
 	longitude = flaskRequest.form.get('longitude')
 	description = flaskRequest.form.get('description')
 	try:
-		DB.add_crime(category,date,latitude,longitude,description)
+		DB.add_crime(category,title,date,latitude,longitude,description)
 	except Exception as e:
 		print(e)
 	finally:
