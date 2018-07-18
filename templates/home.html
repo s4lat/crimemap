@@ -7,7 +7,7 @@
   <script type="text/javascript">
     var map;
     var marker;
-    function initialize() {
+    function initMap() {
       mapOptions = {
         center: new google.maps.LatLng(
         61.24491985810405, 73.42604445203051),
@@ -37,7 +37,7 @@
 key=AIzaSyB_7I8xYc7R5kAKldmhfmlzd0YqWvx0D6Y&callback=initMap"></script>
 </head>
 
-<body onload="initialize()">
+<body onload="initMap()">
   <h1> Crime Map</h1>
   <p> A map of recent criminal activity in the world </p>
   <div id="map-canvas"></div>
