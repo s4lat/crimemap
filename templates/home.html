@@ -3,17 +3,14 @@
   <title>Crime Map</title>
   <link type='text/css' rel="stylesheet" href="{{url_for('static',
     filename='css/style.css')}}">
-
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js">
   </script>
   <script type="text/javascript">
     var map;
     var marker;
     function initialize() {
       mapOptions = {
-        center: new google.maps.LatLng(-
-        33.30578381949298, 26.523442268371582),
+        center: new google.maps.LatLng(
+        61.24491985810405, 73.42604445203051),
         zoom: 15
       };
     map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
@@ -35,7 +32,9 @@
       document.getElementById('longitude').value= location.lng()
     }
   }
-  </script>
+  </script><script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?
+key=AIzaSyB_7I8xYc7R5kAKldmhfmlzd0YqWvx0D6Y&callback=initMap"></script>
 </head>
 
 <body onload="initialize()">
