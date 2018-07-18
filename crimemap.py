@@ -1,5 +1,5 @@
 from dbhelper import DBHelper
-from flask import Flask, render_template
+from flask import Flask, render_template,url_for
 from flask import request as flaskRequest
 import requests
 
@@ -9,17 +9,17 @@ DB = DBHelper()
 @app.route('/')
 def index():
 	try:
-		data = DB.get_all_inputs()
+		crimes = DB.get_all_inputs()
 	except Exception as e:
 		print(e)
-		data = None
-	return render_template('home.html', data=data)
+		crimes = None
+	return render_template('home.html', data=crimes)
 
 @app.route("/add", methods=["POST"])
 def add():
 	try:
-		data = flaskRequest.form.get('userinput')
-		DB.add_input(data)
+		crime = flaskRequest.form.get('userinput')
+		DB.add_input(crime)
 	except Exception as e:
 		print(e)
 	return index()
