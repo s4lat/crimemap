@@ -40,7 +40,6 @@ key=AIzaSyB_7I8xYc7R5kAKldmhfmlzd0YqWvx0D6Y&callback=initMap"></script>
 <body onload="initMap()">
   <h1> Crime Map</h1>
   <p> A map of recent criminal activity in the world </p>
-  <div id="map-canvas"></div>
   <div id="newcrimeform">
     <form action="/submitcrime" method="POST">
     <label for="category">Category:</label>
@@ -60,8 +59,9 @@ key=AIzaSyB_7I8xYc7R5kAKldmhfmlzd0YqWvx0D6Y&callback=initMap"></script>
       <input type="submit" value="Submit"></input>
     </form>
   </div>
+  <div id="map-canvas"></div>
   <div id=crimetable>
-    <table style='border:1px solid #735184;'>
+    <table>
       <tr>
         <td>id</td>
         <td>latitude</td>

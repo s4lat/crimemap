@@ -1,5 +1,5 @@
 from dbhelper import DBHelper
-from flask import Flask, render_template,url_for
+from flask import Flask, render_template,url_for, redirect
 from flask import request as flaskRequest
 import requests
 
@@ -13,16 +13,21 @@ def index():
 	except Exception as e:
 		print(e)
 		crimes = None
-	return render_template('home.html', data=crimes)
+	return render_template('index.html', data=crimes)
 
-@app.route("/add", methods=["POST"])
-def add():
+@app.route("/submitcrime", methods=['POST'])
+def submitcrime():
+	category = flaskRequest.form.get('category')
+	date = flaskRequest.form.get('date')
+	latitude = flaskRequest.form.get('latitude')
+	longitude = flaskRequest.form.get('longitude')
+	description = flaskRequest.form.get('description')
 	try:
-		crime = flaskRequest.form.get('userinput')
-		DB.add_input(crime)
+		DB.add_crime(category,date,latitude,longitude,description)
 	except Exception as e:
 		print(e)
-	return index()
+	finally:
+		return redirect(url_for('index'))
 
 @app.route("/clear")
 def clear():
@@ -30,7 +35,7 @@ def clear():
 		DB.clear_all()
 	except Exception as e:
 		print(e)
-	return index()
+	return redirect(url_for('index'))
 
 if __name__ == "__main__":
 	app.run(port=5000, debug=True)
