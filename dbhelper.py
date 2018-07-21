@@ -25,9 +25,9 @@ class DBHelper:
                     'title' : crime[2],
                     'latitude' : crime[3],
                     'longitude' : crime[4],
-                    'date' : datetime.datetime.strftime(crime[5], '%Y-%m-%d'),
+                    'date' : datetime.datetime.strftime(crime[5], '%d-%m-%y'),
                     'description' : crime[6],
-                    'added' : datetime.datetime.strftime(crime[7], '%Y-%m-%d'),
+                    'added' : datetime.datetime.strftime(crime[7], '%d-%m-%y'),
                 })
             return json_crimes
         finally:
@@ -42,15 +42,5 @@ class DBHelper:
                 connection.commit()
         except Exception as e:
             print(e)
-        finally:
-            connection.close()
-
-    def clear_all(self):
-        connection = self.connect()
-        try:
-            query = "DELETE FROM crimes;"
-            with connection.cursor() as cursor:
-                cursor.execute(query)
-                connection.commit()
         finally:
             connection.close()

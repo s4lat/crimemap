@@ -1,3 +1,4 @@
+crime_env/
 dbconfig.py
 dbtest.py
 *.pyc
